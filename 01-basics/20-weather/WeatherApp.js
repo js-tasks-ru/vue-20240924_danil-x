@@ -25,12 +25,12 @@ export default defineComponent({
           </div>
           <div class="weather-conditions">
             <div class="weather-conditions__icon" :title="city.current.weather.description">{{ WeatherConditionIcons[city.current.weather.id] }}</div>
-            <div class="weather-conditions__temp">{{ city.current.temp }} °C</div>
+            <div class="weather-conditions__temp">{{ (city.current.temp - 273.15).toFixed(1) }} °C</div>
           </div>
           <div class="weather-details">
             <div class="weather-details__item">
               <div class="weather-details__item-label">Давление, мм рт. ст.</div>
-              <div class="weather-details__item-value">{{ city.current.pressure }}</div>
+              <div class="weather-details__item-value">{{ (city.current.pressure * 0.75).toFixed(0) }}</div>
             </div>
             <div class="weather-details__item">
               <div class="weather-details__item-label">Влажность, %</div>
