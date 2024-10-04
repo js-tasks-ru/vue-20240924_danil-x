@@ -8,9 +8,6 @@ export default defineComponent({
     const meetupId = ref(1);
     const meetups = ref({});
 
- //   const meetupTitle = ref(null);
-
-
     async function getMet(id){
       meetups.value = await getMeetup(id);
     }
@@ -20,12 +17,11 @@ export default defineComponent({
     })
 
     onMounted(async()=>{
-        getMet(meetupId.value)
+        await getMet(meetupId.value)
       }
     )
     return {
       meetupId,
-      meetups,
       meetupTitle,
       getMet,
     }
