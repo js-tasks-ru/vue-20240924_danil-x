@@ -35,15 +35,13 @@ export default defineComponent({
   setup() {
     const query = ref(null)
     const markedEmails = computed(()=>{
-      let filteredEmails = []
-      emails.forEach((email)=>{
+      return emails.map((email)=>{
         let marked = false
         if(email.includes(query.value)){
           marked = true
         }
-        filteredEmails.push({email:email,marked:marked})
+        return {email:email,marked:marked}
       })
-      return filteredEmails
     })
 
     return{
