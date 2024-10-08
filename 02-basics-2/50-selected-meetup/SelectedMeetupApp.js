@@ -1,4 +1,4 @@
-import {defineComponent, ref, onMounted, computed} from 'vue'
+import {defineComponent, ref, watchEffect} from 'vue'
 import { getMeetup } from './meetupsService.ts'
 
 export default defineComponent({
@@ -6,21 +6,11 @@ export default defineComponent({
 
   setup() {
     const meetupId = ref(1);
-    const meetups = computed( ()=> {
-      return getMeetup(meetupId.value).then((item)=>{
-        return item.title
-      })
+    const meetups = ref(null);
+
+    watchEffect(async () => {
+        meetups.value = await getMeetup(meetupId.value);
     });
-
-
-    // const meetupTitle = computed(()=>{
-    //   return meetups.value.title
-    // })
-
-    onMounted(async()=>{
-
-      }
-    )
     return {
       meetupId,
       meetups,
@@ -95,7 +85,7 @@ export default defineComponent({
 
       <div class="meetup-selector__cover">
         <div class="meetup-cover">
-          <h1 class="meetup-cover__title">{{ meetups }}</h1>
+          <h1 class="meetup-cover__title">{{ meetups?.title }}</h1>
         </div>
       </div>
 
