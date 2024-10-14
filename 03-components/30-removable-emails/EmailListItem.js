@@ -3,6 +3,8 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'EmailListItem',
 
+  emits: ['delete'],
+
   props: {
     email: {
       type: String,

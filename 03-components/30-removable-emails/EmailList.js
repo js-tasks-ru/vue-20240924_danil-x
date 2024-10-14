@@ -8,6 +8,8 @@ export default defineComponent({
     EmailListItem,
   },
 
+  emits: ['deleteItem'],
+
   props: {
     emails: {
       type: Array,

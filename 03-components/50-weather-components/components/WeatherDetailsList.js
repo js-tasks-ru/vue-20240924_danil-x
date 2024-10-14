@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 import WeatherDetailsItem from "./WeatherDetailsItem.js";
 
 export default defineComponent({
@@ -13,14 +13,14 @@ export default defineComponent({
   },
 
   setup(props) {
-    const {pressure, humidity, clouds, wind_speed} = props.current
-    const fixedPressure = Number((pressure * 0.75).toFixed(0))
+    const fixedPressure = computed(()=> Number((props.current.pressure * 0.75).toFixed(0)))
     const items = {
-      'Давление, мм рт. ст.': fixedPressure,
-      'Влажность, %': humidity,
-      'Облачность, %': clouds,
-      'Ветер, м/с': wind_speed,
+      'Давление, мм рт. ст.': fixedPressure.value,
+      'Влажность, %': props.current.humidity,
+      'Облачность, %': props.current.clouds,
+      'Ветер, м/с': props.current.wind_speed,
     }
+
     return {
       items,
     }

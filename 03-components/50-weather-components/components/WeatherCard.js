@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { WeatherConditionIcons } from './../weather.service.ts'
 import WeatherAlert from "./WeatherAlert.js";
 import WeatherInfo from "./WeatherInfo.js";
@@ -17,7 +17,8 @@ export default defineComponent({
   },
 
   setup(props) {
-    const isNight = props.city.current.dt < props.city.current.sunrise || props.city.current.dt > props.city.current.sunset
+    const isNight = computed(()=> props.city.current.dt < props.city.current.sunrise || props.city.current.dt > props.city.current.sunset)
+
     return {
       WeatherConditionIcons,
       isNight,
